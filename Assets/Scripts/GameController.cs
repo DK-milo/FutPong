@@ -8,7 +8,10 @@ namespace FutPong
         private int _goalsPlayer1;
         private int _goalsPlayer2;
 
-        public UnityEvent<int> OnScore;
+        [SerializeField] private PlayerInput[] _players = null;
+        [SerializeField] private Ball _ball = null;
+
+        public UnityEvent<int> UpdateHUD;
 
         private void Awake()
         {
@@ -21,7 +24,7 @@ namespace FutPong
             Time.timeScale = state ? 1.0f : 0.0f;
         }
 
-        public void AddGoal(int idNet)
+        public void Score(int idNet)
         {
             if (idNet == 0)
             {
@@ -31,9 +34,22 @@ namespace FutPong
             {
                 _goalsPlayer1++;
             }
+            
+            // Update the UI
+            UpdateHUD.Invoke(idNet);
 
-            OnScore.Invoke(idNet);
+            Restart();
         }
         #endregion
+        
+        private void Restart()
+        {
+            foreach (PlayerInput playerInput in _players)
+            {
+                playerInput.Restart();
+            }
+
+            _ball.Restart();
+        }
     }
 }
