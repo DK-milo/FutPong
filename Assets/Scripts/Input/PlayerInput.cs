@@ -19,5 +19,10 @@ namespace FutPong
             Vector2 direction = new Vector2(0, inputVertical);
             GetComponent<Rigidbody2D>().velocity = direction * _movementSpeed * Time.deltaTime;
         }
+
+        public void Restart()
+        {
+            transform.position = new Vector2(transform.position.x, 0);
+        }
     }
 }
