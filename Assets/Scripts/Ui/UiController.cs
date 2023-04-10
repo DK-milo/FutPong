@@ -1,8 +1,7 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
-namespace FutPong.Assets.Scripts
+namespace FutPong
 {
     public class UiController : MonoBehaviour
     {
@@ -12,16 +11,14 @@ namespace FutPong.Assets.Scripts
 
         [SerializeField] private TMP_Text _goalsPlayer1 = null;
         [SerializeField] private TMP_Text _goalsPlayer2 = null;
-
-        public UnityEvent<bool> OnStartEvent;
-
+        
         private void Update()
         {
             if (!Input.GetKeyDown(KeyCode.Escape)) return;
 
             if (_mainMenu.activeInHierarchy == false)
             {
-                OnStartEvent.Invoke(false);
+                Time.timeScale = 0.0f;
                 _mainMenu.SetActive(true);
             }
 
@@ -35,7 +32,7 @@ namespace FutPong.Assets.Scripts
         public void ButtonStart()
         {
             _mainMenu.SetActive(false);
-            OnStartEvent.Invoke(true);
+            Time.timeScale = 1.0f;
         }
 
         public void ButtonSettings()
@@ -43,21 +40,14 @@ namespace FutPong.Assets.Scripts
             _startMenu.SetActive(false);
             _menuSettings.SetActive(true);
         }
-
-        public void UpdateGoalsUi(int netId)
+        
+        public void UpdateGoalsPlayer1(Net net)
         {
-            int tempScore;
-
-            if (netId == 0)
-            {
-                tempScore = int.Parse(_goalsPlayer2.text) + 1;
-                _goalsPlayer2.text = tempScore.ToString();
-            }
-            else
-            {
-                tempScore = int.Parse(_goalsPlayer1.text) + 1;
-                _goalsPlayer1.text = tempScore.ToString();
-            }
+            _goalsPlayer2.text = net.GoalsReceived.ToString();
+        }
+        public void UpdateGoalsPlayer2(Net net)
+        {
+            _goalsPlayer1.text = net.GoalsReceived.ToString();
         }
     }
 }

@@ -9,12 +9,11 @@ namespace FutPong
         private Vector2 _ballDirection;
         [SerializeField, Range(1.0f, 50.0f)] private float _speed = 1.0f;
 
-        private void Start()
+        private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
             _ballDirection = new Vector2(Random.Range(0, 2) * 2 - 1, 0);
             _rb.velocity = _ballDirection * _speed;
-            //_rb.AddForce(_ballDirection * _speed, ForceMode2D.Impulse);
         }
 
         private void OnCollisionEnter2D(Collision2D col)

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FutPong.Assets.Scripts
+namespace FutPong
 {
     public class KeyMapper : MonoBehaviour
     {

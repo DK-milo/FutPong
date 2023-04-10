@@ -782,21 +782,6 @@ MonoBehaviour:
   _menuSettings: {fileID: 2020169692}
   _goalsPlayer1: {fileID: 952616724}
   _goalsPlayer2: {fileID: 94017148}
-  OnStartEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 665107670}
-        m_TargetAssemblyTypeName: FutPong.GameController, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &361818885
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,13 +886,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60cb4fe2ccaad4f4faf606b6ca5eef07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _idNet: 1
-  OnGoal:
+  _netId: 1
+  GoalsReceived: 0
+  OnScore:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 665107670}
         m_TargetAssemblyTypeName: FutPong.GameController, Assembly-CSharp
         m_MethodName: Score
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  UpdateHUD:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 297157690}
+        m_TargetAssemblyTypeName: FutPong.UiController, Assembly-CSharp
+        m_MethodName: UpdateGoalsPlayer2
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1443,21 +1444,7 @@ MonoBehaviour:
   - {fileID: 502509025}
   - {fileID: 1439217172}
   _ball: {fileID: 1337327312}
-  UpdateHUD:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 297157690}
-        m_TargetAssemblyTypeName: FutPong.Assets.Scripts.UiController, Assembly-CSharp
-        m_MethodName: UpdateGoalsUi
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _nets: []
 --- !u!4 &665107671
 Transform:
   m_ObjectHideFlags: 0
@@ -1758,13 +1745,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60cb4fe2ccaad4f4faf606b6ca5eef07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _idNet: 0
-  OnGoal:
+  _netId: 0
+  GoalsReceived: 0
+  OnScore:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 665107670}
         m_TargetAssemblyTypeName: FutPong.GameController, Assembly-CSharp
         m_MethodName: Score
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  UpdateHUD:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 297157690}
+        m_TargetAssemblyTypeName: FutPong.UiController, Assembly-CSharp
+        m_MethodName: UpdateGoalsPlayer1
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
