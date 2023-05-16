@@ -11,6 +11,7 @@ namespace FutPong
         {
             _keyUp = keyCode;
         }
+
         public void SetKeyDown(KeyCode keyCode)
         {
             _keyDown = keyCode;

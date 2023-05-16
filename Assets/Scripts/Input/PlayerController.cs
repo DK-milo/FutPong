@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FutPong
 {
-    public class PlayerInput : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         [SerializeField] private InputHandler _inputHandler = null;
         [SerializeField, Range(250.0f, 500.0f)] private float _movementSpeed = 500.0f;

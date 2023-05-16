@@ -4,11 +4,12 @@ namespace FutPong
 {
     public class GameController : MonoBehaviour
     {
-        [SerializeField] private PlayerInput[] _players = null;
+        [SerializeField] private PlayerController[] _players = null;
         [SerializeField] private Ball _ball = null;
 
         private void Awake()
         {
+            Net.onScore += Score;
             Time.timeScale = 0.0f;
         }
         
@@ -23,7 +24,7 @@ namespace FutPong
 
         public void Restart()
         {
-            foreach (PlayerInput playerInput in _players)
+            foreach (PlayerController playerInput in _players)
             {
                 playerInput.Restart();
             }

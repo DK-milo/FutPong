@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace FutPong
@@ -8,7 +9,9 @@ namespace FutPong
         [SerializeField] private InputKey _player2InputKey = null;
         private bool _isSetting;
         private int _buttonIndex;
-        
+        public static Action<int> onButtonMapping;
+        public static Action onButtonMapped;
+
         private void OnGUI()
         {
             if (!_isSetting) return;
@@ -16,7 +19,7 @@ namespace FutPong
             Event e = Event.current;
 
             if (!e.isKey || e.keyCode == KeyCode.None) return;
-
+            
             switch (_buttonIndex)
             {
                 case 0:
@@ -32,11 +35,18 @@ namespace FutPong
                     _player2InputKey.SetKeyDown(e.keyCode);
                     break;
             }
-
+            
+            onButtonMapped.Invoke();
             _isSetting = false;
         }
+
         public void SetKeyCode(int buttonIndex)
         {
+            onButtonMapping.Invoke(buttonIndex);
+
+            if (_isSetting) return;
+
+            Debug.Log("Press a key");
             _isSetting = true;
             _buttonIndex = buttonIndex;
         }

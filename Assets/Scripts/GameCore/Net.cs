@@ -1,14 +1,14 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace FutPong
 {
     public class Net : MonoBehaviour, IScore
     {
-        [SerializeField] private int _netId;
+        public int Id;
         public int GoalsReceived { get; private set; }
-        public UnityEvent OnScore;
-        public UnityEvent<Net> UpdateHUD;
+        public static Action onScore;
+        public static Action<Net> updateHUD;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -20,8 +20,8 @@ namespace FutPong
         public void Score()
         {
             GoalsReceived++;
-            OnScore.Invoke();
-            UpdateHUD.Invoke(this);
+            onScore.Invoke();
+            updateHUD?.Invoke(this);
         }
     }
 }

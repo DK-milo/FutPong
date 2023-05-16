@@ -38,7 +38,6 @@ namespace FutPong
             yield return new WaitForSeconds(1.0f);
 
             _ballDirection = new Vector2(Random.Range(0, 2) * 2 - 1, 0);
-            //_rb.AddForce(_ballDirection * _speed, ForceMode2D.Impulse);
 
             _rb.velocity = _ballDirection * _speed;
         }

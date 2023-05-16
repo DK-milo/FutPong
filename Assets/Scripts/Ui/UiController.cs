@@ -11,7 +11,17 @@ namespace FutPong
 
         [SerializeField] private TMP_Text _goalsPlayer1 = null;
         [SerializeField] private TMP_Text _goalsPlayer2 = null;
-        
+
+        [SerializeField] private GameObject _buttonMappingPanel;
+        [SerializeField] private TMP_Text _buttonMapping = null;
+
+        private void Awake()
+        {
+            Net.updateHUD += UpdateGoalsUi;
+            KeyMapper.onButtonMapping += OpenMappedButtonAlert;
+            KeyMapper.onButtonMapped += CloseMappedButtonAlert;
+        }
+
         private void Update()
         {
             if (!Input.GetKeyDown(KeyCode.Escape)) return;
@@ -40,14 +50,28 @@ namespace FutPong
             _startMenu.SetActive(false);
             _menuSettings.SetActive(true);
         }
-        
-        public void UpdateGoalsPlayer1(Net net)
+
+        private void UpdateGoalsUi(Net net)
         {
-            _goalsPlayer2.text = net.GoalsReceived.ToString();
+            if (net.Id == 0)
+            {
+                _goalsPlayer2.text = net.GoalsReceived.ToString();
+            }
+            else
+            {
+                _goalsPlayer1.text = net.GoalsReceived.ToString();
+            }
         }
-        public void UpdateGoalsPlayer2(Net net)
+
+        private void OpenMappedButtonAlert(int buttonIndex)
         {
-            _goalsPlayer1.text = net.GoalsReceived.ToString();
+            _buttonMappingPanel.SetActive(true);
+            _buttonMapping.text = $"Now mapping button: {buttonIndex}";
+        }
+
+        private void CloseMappedButtonAlert()
+        {
+            _buttonMappingPanel.SetActive(false);
         }
     }
 }
